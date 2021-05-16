@@ -65,6 +65,7 @@ for j in range(1, N+3):
 coarse_imgs = []
 prev_img = input_img
 for j in range(N+3):
+    # You can accelerate this operation by optimizing sparse kernel convolution.
     prev_img = cv2.filter2D(prev_img, -1, h_filters[j])
     coarse_imgs.append(prev_img)
 
@@ -86,7 +87,7 @@ for y in range(1, input_img.shape[0]-1):
             if cur[y, x] < extrema_threshold-0.01:
                 continue
 
-            # keypoint refinement by Taylor expansion
+            # keypoint refinement using Taylor expansion
 
             dDx = (cur[y, x+1] - cur[y, x-1]) / 2
             dDy = (cur[y+1, x] - cur[y-1, x]) / 2
